@@ -20,7 +20,7 @@ if __name__ == "__main__":
     parser.add_argument('-imgMRI', help='Name of NIfTI image of MRI.', required=True)
     parser.add_argument('-inputFold', help='Path to folder were input files (PET & MRI) are stored', required=True)
     parser.add_argument('-outputFold', help='Path to folder were output files (PET images after every iteration and '
-                                            'and blended PET and MRI images) are stored', required=True)
+                                            'blended PET and MRI images) are stored', required=True)
 
     args = parser.parse_args()
 
