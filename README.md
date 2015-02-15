@@ -9,9 +9,9 @@ Goal of this project is to realign PET to MRI.
 
 Dependencies: 
 
-[Numpy](http://www.scipy.org/install.html)
-[MedPy](https://pypi.python.org/pypi/MedPy)
-[OpenCV](http://opencv.org/)
+* [Numpy](http://www.scipy.org/install.html)
+* [MedPy](https://pypi.python.org/pypi/MedPy)
+* [OpenCV](http://opencv.org/)
 
 ==============================================
 
@@ -38,7 +38,7 @@ File responsible for results presentation. It assumes that
 
 ## alignment.py
 
-
+Module with functions responsible for finding best transformation based on similarity measure
 
 ## imgprocess.py
 

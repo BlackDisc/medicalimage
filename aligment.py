@@ -8,23 +8,51 @@ import imgprocess as imgp
 
 def compareImg(img1, img2, method = 'mutual'):
 
+    """
+    Function returns information about two images similarity
+
+    :param img1: image1(2D nparray)
+    :param img2: image2(2D nparray)
+    :param method: method of comparison images
+    :return: dependent from method
+        mutual - mutual information coefficient
+    """
     if method == 'mutual':
         return medpy.metric.mutual_information(img1,img2)
 
 
 def saveCompareMatrix(matrix, filename):
+    """
+    Function saves matrix with similarity measure for two stack of images stored in matrix
+
+    :param matrix: similarity matrix
+    :param filename: output filename
+    """
     img_save = (matrix.astype(np.float) - np.min(matrix))/np.max(matrix)*255
     img_bgr = cv2.cvtColor(np.uint8(img_save), cv2.COLOR_GRAY2BGR)
     colormap_img = cv2.applyColorMap(img_bgr, cv2.COLORMAP_JET)
     cv2.imwrite(filename, colormap_img)
 
 def saveImage(matrix, filename):
+    """
+    Function saves image to file
+
+    :param matrix: input image matrix
+    :param filename: output filename
+    """
     img_save = (matrix.astype(np.float) - np.min(matrix))/np.max(matrix)*255
     img_bgr = cv2.cvtColor(np.uint8(img_save), cv2.COLOR_GRAY2BGR)
     cv2.imwrite(filename, img_bgr)
 
 def saveBlendedImages(image_data1,image_data2, folder_output):
 
+    """
+    Saves blended image stacks to PNG files
+
+    :param image_data1: images stack (3D nparray)
+    :param image_data2: images stack (3D nparray)
+    :param folder_output: output folder
+    """
     if not os.path.exists(os.path.join(folder_output,'PET_MRI_results')):
         os.makedirs(os.path.join(folder_output,'PET_MRI_results'))
 
@@ -54,6 +82,15 @@ def saveBlendedImages(image_data1,image_data2, folder_output):
 
 def iterativeAligment(image_data_PET, image_data_MRI, folder_output, save_arrays = True, save_iters = True):
 
+    """
+    Iterative approach to find bes image alignment of two image stacks
+
+    :param image_data_PET: images stack (3D nparray)
+    :param image_data_MRI: images stack (3D nparray)
+    :param folder_output: folder output for snapshots after each iteration
+    :param save_arrays: flag indicating saving arrays or not
+    :param save_iters: flag indicating saving image for each iteration or not
+    """
     rows_PET, cols_PET, num_PET = image_data_PET.shape
     rows_MRI, cols_MRI, num_MRI = image_data_MRI.shape
     rot_trans_matrix = np.zeros((num_PET, num_MRI), dtype=np.float32)
